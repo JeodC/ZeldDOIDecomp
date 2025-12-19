@@ -1,0 +1,1 @@
+CanShoot = true;

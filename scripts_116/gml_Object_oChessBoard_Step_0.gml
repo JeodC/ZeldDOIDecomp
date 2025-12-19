@@ -1,0 +1,196 @@
+if (!DB_Started && input_check_pressed("item"))
+{
+    switch (Status)
+    {
+        case UnknownEnum.Value_0:
+            var MsgInst = instance_create_layer(0, 0, "System", oDialogueBox_Chess, 
+            {
+                Msg: "Resign?"
+            });
+            break;
+        
+        case UnknownEnum.Value_1:
+            var MsgInst = instance_create_layer(0, 0, "System", oDialogueBox_Chess, 
+            {
+                Msg: "New Game?"
+            });
+            break;
+    }
+    
+    DB_Started = true;
+}
+
+if (DB_Started)
+{
+    if (!instance_exists(global.DB_Inst))
+    {
+        switch (global.DB_ExitCode)
+        {
+            case 0:
+                with (oLink)
+                    UpdateState(UnknownEnum.Value_26);
+                
+                break;
+            
+            case 1:
+                instance_destroy(self);
+                break;
+            
+            case 2:
+                with (oLink)
+                    UpdateState(UnknownEnum.Value_26);
+                
+                Board_Reset();
+                break;
+        }
+        
+        DB_Started = false;
+    }
+    else
+    {
+        exit;
+    }
+}
+
+if (Status == UnknownEnum.Value_0)
+{
+    MoveType = UnknownEnum.Value_0;
+    
+    switch (global.Chess_Player)
+    {
+        case UnknownEnum.Value_1:
+            if (input_check_pressed("left"))
+            {
+                SelectionX--;
+                
+                if (SelectionX < 0)
+                    SelectionX += 8;
+            }
+            
+            if (input_check_pressed("right"))
+                SelectionX = (SelectionX + 1) % 8;
+            
+            if (input_check_pressed("up"))
+            {
+                SelectionY--;
+                
+                if (SelectionY < 0)
+                    SelectionY += 8;
+            }
+            
+            if (input_check_pressed("down"))
+                SelectionY = (SelectionY + 1) % 8;
+            
+            if (input_check_pressed("action") || input_check_pressed("sword"))
+            {
+                var _BoardGridY = 7 - SelectionY;
+                
+                if (sign(global.Board[SelectionX][_BoardGridY]) == global.Chess_Player && !array_equals_(piece_selected, [SelectionX, _BoardGridY]))
+                {
+                    var __t = get_legal_moves([SelectionX, _BoardGridY]);
+                    array_can_move = __t[0];
+                    array_can_capture = __t[1];
+                    piece_selected = [SelectionX, _BoardGridY];
+                    break;
+                }
+                
+                if (array_find(array_can_move, [SelectionX, _BoardGridY]) || array_find(array_can_capture, [SelectionX, _BoardGridY]))
+                {
+                    move(piece_selected, [SelectionX, _BoardGridY]);
+                    StockfishStr = "";
+                }
+                else
+                {
+                    audio_play_sound(Sound_Chess_Notify, 1, false);
+                }
+                
+                array_can_move = [];
+                array_can_capture = [];
+                piece_selected = [];
+            }
+            
+            break;
+        
+        case UnknownEnum.Value_m1:
+            if (!AllowAIMove)
+                break;
+            
+            var BestMoveStrPos;
+            
+            do
+            {
+                StockfishProcess = ProcessExecuteAsync("data\\sf.exe");
+                
+                do
+                {
+                }
+                until (ProcIdExists(StockfishProcess));
+                
+                FEN_BeforeAIMove = BoardToFen();
+                var DepthStr;
+                
+                if (HalfMove <= 9)
+                    DepthStr = string(irandom_range(5, 8));
+                else
+                    DepthStr = string(irandom_range(2, 5));
+                
+                ExecutedProcessWriteToStandardInput(StockfishProcess, "position fen " + FEN_BeforeAIMove + "\ngo depth " + DepthStr + "\n");
+                
+                do
+                {
+                    AIOutput = ExecutedProcessReadFromStandardOutput(StockfishProcess);
+                    BestMoveStrPos = string_pos("bestmove", AIOutput);
+                }
+                until (BestMoveStrPos != 0);
+                
+                AIOutput = string_copy(AIOutput, BestMoveStrPos, 100);
+                FreeExecutedProcessStandardInput(StockfishProcess);
+                FreeExecutedProcessStandardOutput(StockfishProcess);
+                ProcIdKill(StockfishProcess);
+                
+                do
+                {
+                }
+                until (!ProcIdExists(StockfishProcess));
+            }
+            until (string_pos("sf", AIOutput) == 0 && BestMoveStrPos != 0);
+            
+            var StrStartX = 10;
+            var MoveStr1 = string_copy(AIOutput, StrStartX, 1);
+            var MoveStr2 = string_copy(AIOutput, StrStartX + 1, 1);
+            var MoveStr3 = string_copy(AIOutput, StrStartX + 2, 1);
+            var MoveStr4 = string_copy(AIOutput, StrStartX + 3, 1);
+            PromotePiece = string_copy(AIOutput, StrStartX + 4, 1);
+            
+            if (PromotePiece == "b" || PromotePiece == "r")
+                PromotePiece = "q";
+            
+            MoveStart = [ord(MoveStr1) - 97, ord(MoveStr2) - 49];
+            MoveEnd = [ord(MoveStr3) - 97, ord(MoveStr4) - 49];
+            move(MoveStart, MoveEnd);
+            break;
+    }
+    
+    VerifyChecks();
+    
+    if (MoveType != UnknownEnum.Value_0)
+    {
+        if (Status == UnknownEnum.Value_1)
+            audio_play_sound(Sound_Chess_Checkmate, 1, false);
+        else if (MoveType == UnknownEnum.Value_2)
+            audio_play_sound(Sound_Chess_Capture, 1, false);
+        else if (check_king[0] || check_king[1])
+            audio_play_sound(Sound_Chess_Check, 1, false);
+        else
+            audio_play_sound(Sound_Chess_Move, 1, false);
+    }
+}
+
+enum UnknownEnum
+{
+    Value_m1 = -1,
+    Value_0,
+    Value_1,
+    Value_2,
+    Value_26 = 26
+}

@@ -1,0 +1,1 @@
+oLink.AutoMoveSpeed = 0;

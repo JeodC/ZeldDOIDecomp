@@ -1,0 +1,320 @@
+================================
+gml_GlobalScript___RoomTemplates
+BEFORE
+================================
+
+function RoomTemplates_Load()
+{
+    global.RoomTemplateObjTypes[UnknownEnum.Value_0] = ["Water", "CarpetsFull", "Carpets", "Spikes", "WallsUpper", "Doors", "ExtraCeilings", "OutOfBounds", "SplitConnections"];
+    global.RoomTemplateObjTypes[UnknownEnum.Value_1] = ["Water", "CarpetsFull", "Carpets", "Spikes", "WallsLower", "WallsUpper", "Doors", "LowerFloor", "OutOfBounds", "SplitConnections"];
+    global.RoomTemplateObjTypes[UnknownEnum.Value_2] = ["Water", "Spikes", "WallsLower", "WallsUpper", "WallsCommon", "Stairs", "Doors", "LowerFloor", "OutOfBounds"];
+    global.RoomTemplateObjTypes[UnknownEnum.Value_3] = ["WallsUpper", "Objs", "Doors", "OutOfBounds"];
+    global.RoomTemplateObjTypes[UnknownEnum.Value_6] = ["Pit", "Water", "CarpetsFull", "FloorObjs", "WallsLower", "Holes", "Spikes", "WallsUpper", "WallsCommon", "Doors"];
+    global.RoomTemplateObjTypes[UnknownEnum.Value_7] = ["Pit", "Water", "Spikes", "WallsLower", "Holes", "WallsUpper", "WallsCommon", "Doors", "LowerFloor", "OutOfBounds"];
+    global.RoomTemplateObjTypes[UnknownEnum.Value_8] = ["Water", "FloorObjs", "WallsLower", "WallsUpper", "Objs", "Doors", "LowerFloor", "OutOfBounds"];
+    global.RoomTemplateObjTypes[UnknownEnum.Value_9] = ["Pit", "Holes", "Water", "FloorObjs", "WallsLower", "WallsUpper", "WallsCommon", "Objs", "Stairs", "Doors", "LowerFloor", "ExtraCeilings", "OutOfBounds"];
+    global.RoomTemplateObjTypes[UnknownEnum.Value_4] = ["Pit", "Holes", "Water", "FloorObjs", "WallsLower", "WallsUpper", "WallsCommon", "Objs", "Doors", "LowerFloor", "ExtraCeilings", "OutOfBounds"];
+    global.RoomTemplateObjTypes[UnknownEnum.Value_5] = ["Pit", "Holes", "Water", "FloorObjs", "WallsLower", "WallsUpper", "WallsCommon", "Objs", "Stairs", "Doors", "LowerFloor", "OutOfBounds"];
+    global.RoomTemplateObjTypes_Section[UnknownEnum.Value_0] = ["SectionArea", "Zones", "Enemies", "SectionWalls", "MovingSpikeBlocks", "RollingSpikes", "GuruBars", "Jails", "Altars", "Kinstones", "Monuments", "Torches", "Crystals", "PotTreasures", "Treasures", "Pots"];
+    global.RoomTemplateObjTypes_Section[UnknownEnum.Value_1] = ["Zones", "Enemies", "MovingSpikeBlocks", "GuruBars", "Altars", "Kinstones", "Monuments", "Torches", "Crystals", "PotTreasures", "Treasures", "Pots"];
+    global.RoomTemplateObjTypes_Section[UnknownEnum.Value_2] = ["Zones", "Enemies", "MovingSpikeBlocks", "Altars", "Kinstones", "Monuments", "Torches", "Crystals", "PotTreasures", "Treasures", "Pots"];
+    global.RoomTemplateObjTypes_Section[UnknownEnum.Value_3] = ["Zones", "Enemies", "Jails", "Altars", "Kinstones", "Monuments", "Torches", "PotTreasures", "Treasures", "Pots"];
+    global.RoomTemplateObjTypes_Section[UnknownEnum.Value_6] = ["Zones", "Enemies", "MovingSpikeBlocks", "RollingSpikes", "GuruBars", "Altars", "Kinstones", "Monuments", "Torches", "Crystals", "PotTreasures", "Treasures", "Pots"];
+    global.RoomTemplateObjTypes_Section[UnknownEnum.Value_7] = ["SectionArea", "Enemies", "SectionWalls", "MovingSpikeBlocks", "RollingSpikes", "GuruBars", "Altars", "Kinstones", "Monuments", "Torches", "Crystals", "PotTreasures", "Treasures", "Pots"];
+    global.RoomTransformTypeList = ds_list_create_sequence(0, 7);
+    global.MainSectionIndexes = [1, 2, 9, 17, 21, 25, 27];
+    var ParsedTemplates_Buffer = buffer_load("data\\data_r");
+    global.Templates_Room = json_parse(buffer_read(ParsedTemplates_Buffer, buffer_string));
+    buffer_delete(ParsedTemplates_Buffer);
+    ParsedTemplates_Buffer = -1;
+    
+    for (var _ClassIndex = 0; _ClassIndex < 10; _ClassIndex++)
+    {
+        var _SubClasses = array_length(global.Templates_Room[_ClassIndex]);
+        
+        for (var _SubClassIndex = 0; _SubClassIndex < _SubClasses; _SubClassIndex++)
+        {
+            global.Templates_Room_Count[_ClassIndex][_SubClassIndex] = array_length(global.Templates_Room[_ClassIndex][_SubClassIndex]);
+            global.UnusedRoomTemplatesList[_ClassIndex][_SubClassIndex] = ds_list_create();
+        }
+    }
+}
+
+================================
+gml_GlobalScript___RoomTemplates
+AFTER
+================================
+
+function RoomTemplates_Load()
+{
+    global.RoomTemplateObjTypes[UnknownEnum.Value_0] = ["Water", "CarpetsFull", "Carpets", "Spikes", "WallsUpper", "Doors", "ExtraCeilings", "OutOfBounds", "SplitConnections"];
+    global.RoomTemplateObjTypes[UnknownEnum.Value_1] = ["Water", "CarpetsFull", "Carpets", "Spikes", "WallsLower", "WallsUpper", "Doors", "LowerFloor", "OutOfBounds", "SplitConnections"];
+    global.RoomTemplateObjTypes[UnknownEnum.Value_2] = ["Water", "Spikes", "WallsLower", "WallsUpper", "WallsCommon", "Stairs", "Doors", "LowerFloor", "OutOfBounds"];
+    global.RoomTemplateObjTypes[UnknownEnum.Value_3] = ["WallsUpper", "Objs", "Doors", "OutOfBounds"];
+    global.RoomTemplateObjTypes[UnknownEnum.Value_6] = ["Pit", "Water", "CarpetsFull", "FloorObjs", "WallsLower", "Holes", "Spikes", "WallsUpper", "WallsCommon", "Doors"];
+    global.RoomTemplateObjTypes[UnknownEnum.Value_7] = ["Pit", "Water", "Spikes", "WallsLower", "Holes", "WallsUpper", "WallsCommon", "Doors", "LowerFloor", "OutOfBounds"];
+    global.RoomTemplateObjTypes[UnknownEnum.Value_8] = ["Water", "FloorObjs", "WallsLower", "WallsUpper", "Objs", "Doors", "LowerFloor", "OutOfBounds"];
+    global.RoomTemplateObjTypes[UnknownEnum.Value_9] = ["Pit", "Holes", "Water", "FloorObjs", "WallsLower", "WallsUpper", "WallsCommon", "Objs", "Stairs", "Doors", "LowerFloor", "ExtraCeilings", "OutOfBounds"];
+    global.RoomTemplateObjTypes[UnknownEnum.Value_4] = ["Pit", "Holes", "Water", "FloorObjs", "WallsLower", "WallsUpper", "WallsCommon", "Objs", "Doors", "LowerFloor", "ExtraCeilings", "OutOfBounds"];
+    global.RoomTemplateObjTypes[UnknownEnum.Value_5] = ["Pit", "Holes", "Water", "FloorObjs", "WallsLower", "WallsUpper", "WallsCommon", "Objs", "Stairs", "Doors", "LowerFloor", "OutOfBounds"];
+    global.RoomTemplateObjTypes_Section[UnknownEnum.Value_0] = ["SectionArea", "Zones", "Enemies", "SectionWalls", "MovingSpikeBlocks", "RollingSpikes", "GuruBars", "Jails", "Altars", "Kinstones", "Monuments", "Torches", "Crystals", "PotTreasures", "Treasures", "Pots"];
+    global.RoomTemplateObjTypes_Section[UnknownEnum.Value_1] = ["Zones", "Enemies", "MovingSpikeBlocks", "GuruBars", "Altars", "Kinstones", "Monuments", "Torches", "Crystals", "PotTreasures", "Treasures", "Pots"];
+    global.RoomTemplateObjTypes_Section[UnknownEnum.Value_2] = ["Zones", "Enemies", "MovingSpikeBlocks", "Altars", "Kinstones", "Monuments", "Torches", "Crystals", "PotTreasures", "Treasures", "Pots"];
+    global.RoomTemplateObjTypes_Section[UnknownEnum.Value_3] = ["Zones", "Enemies", "Jails", "Altars", "Kinstones", "Monuments", "Torches", "PotTreasures", "Treasures", "Pots"];
+    global.RoomTemplateObjTypes_Section[UnknownEnum.Value_6] = ["Zones", "Enemies", "MovingSpikeBlocks", "RollingSpikes", "GuruBars", "Altars", "Kinstones", "Monuments", "Torches", "Crystals", "PotTreasures", "Treasures", "Pots"];
+    global.RoomTemplateObjTypes_Section[UnknownEnum.Value_7] = ["SectionArea", "Enemies", "SectionWalls", "MovingSpikeBlocks", "RollingSpikes", "GuruBars", "Altars", "Kinstones", "Monuments", "Torches", "Crystals", "PotTreasures", "Treasures", "Pots"];
+    global.RoomTransformTypeList = ds_list_create_sequence(0, 7);
+    global.MainSectionIndexes = [1, 2, 9, 17, 21, 25, 27];
+    global.Templates_Room = array_create(10);
+    
+    for (var i = 0; i < 10; i++)
+    {
+        global.Templates_Room[i] = array_create(8);
+        
+        for (var j = 0; j < 8; j++)
+            global.Templates_Room[i][j] = [];
+    }
+    
+    for (var _ClassIndex = 0; _ClassIndex < 10; _ClassIndex++)
+    {
+        for (var _SubClassIndex = 0; _SubClassIndex < 8; _SubClassIndex++)
+        {
+            var _ChunkFile = "data\\rooms\\data_r_" + string(_ClassIndex) + "_" + string(_SubClassIndex) + ".json";
+            
+            if (file_exists(_ChunkFile))
+            {
+                var buf = buffer_load(_ChunkFile);
+                var str = buffer_read(buf, buffer_string);
+                buffer_delete(buf);
+                global.Templates_Room[_ClassIndex][_SubClassIndex] = json_parse(str);
+            }
+        }
+    }
+    
+    for (var _ClassIndex = 0; _ClassIndex < 10; _ClassIndex++)
+    {
+        var _SubClasses = array_length(global.Templates_Room[_ClassIndex]);
+        
+        for (var _SubClassIndex = 0; _SubClassIndex < _SubClasses; _SubClassIndex++)
+        {
+            global.Templates_Room_Count[_ClassIndex][_SubClassIndex] = array_length(global.Templates_Room[_ClassIndex][_SubClassIndex]);
+            global.UnusedRoomTemplatesList[_ClassIndex][_SubClassIndex] = ds_list_create();
+        }
+    }
+}
+
+================================
+gml_GlobalScript___Dungeon
+BEFORE
+================================
+
+function Dungeon_LoadTemplates()
+{
+    var _TemplateBuffer = buffer_load("data\\data_d");
+    var Templates_Dungeon_Temp = json_parse(buffer_read(_TemplateBuffer, buffer_string));
+    buffer_delete(_TemplateBuffer);
+    global.Templates_Dungeon = array_create(7);
+    
+    for (var _ClassType = 0; _ClassType < 7; _ClassType++)
+    {
+        if (_ClassType != UnknownEnum.Value_6)
+            global.Templates_Dungeon[_ClassType] = array_create(8);
+        
+        global.Templates_Dungeon[_ClassType][UnknownEnum.Value_0] = StructCopy(Templates_Dungeon_Temp[_ClassType]);
+        
+        if (_ClassType == UnknownEnum.Value_6)
+            continue;
+        
+        var _DungeonCount = array_length(global.Templates_Dungeon[_ClassType][UnknownEnum.Value_0]);
+        
+        for (var _TransformType = 1; _TransformType < 8; _TransformType++)
+        {
+            for (var _DungeonIndex = 0; _DungeonIndex < _DungeonCount; _DungeonIndex++)
+            {
+                global.Templates_Dungeon[_ClassType][_TransformType][_DungeonIndex] = StructCopy(Templates_Dungeon_Temp[_ClassType][_DungeonIndex]);
+                var _Dungeon = global.Templates_Dungeon[_ClassType][_TransformType][_DungeonIndex];
+                var _RoomArray = struct_get_from_hash(_Dungeon, variable_get_hash("Rooms"));
+                var _Rooms = array_length(_RoomArray);
+                
+                for (var _RoomIndex = 0; _RoomIndex < _Rooms; _RoomIndex++)
+                {
+                    var _Room = _RoomArray[_RoomIndex];
+                    var NewData = GetTransformedDungeonGrid(_Room.GridX, _Room.GridY, _Room.GridW, _Room.GridH, _TransformType);
+                    _Room.GridX = NewData[0];
+                    _Room.GridY = NewData[1];
+                    _Room.GridW = NewData[2];
+                    _Room.GridH = NewData[3];
+                    _Room.x = _Room.GridX * 256;
+                    _Room.y = _Room.GridY * 256;
+                    _Room.width = _Room.GridW * 256;
+                    _Room.height = _Room.GridH * 256;
+                    var _RoomSizeIndex = global.RoomSizeIndex[_Room.GridW][_Room.GridH];
+                    var _DoorArray = _Room.Doors;
+                    var _Doors = array_length(_DoorArray);
+                    
+                    for (var _DoorIndex = 0; _DoorIndex < _Doors; _DoorIndex++)
+                    {
+                        var _Door = _DoorArray[_DoorIndex];
+                        _Door.Position = GetTransformedDoorPosition(_Door.Position, _TransformType);
+                        _Door.ConnectedDoorPos = GetTransformedDoorPosition(_Door.ConnectedDoorPos, _TransformType);
+                        _Door.x = global.DoorCoordinates[_RoomSizeIndex][_Door.Position].x;
+                        _Door.y = global.DoorCoordinates[_RoomSizeIndex][_Door.Position].y;
+                        _Door.Location = GetTransformedDoorLocation(_Door.Location, _TransformType);
+                        
+                        if (_Door.Status == UnknownEnum.Value_3)
+                            _Dungeon.EntranceRoomIndex = _RoomIndex;
+                    }
+                    
+                    if (struct_get_from_hash(_Room, variable_get_hash("Section_ID")) > 0)
+                        _Room.Section_ID = GetTransformedSectionID(struct_get_from_hash(_Room, variable_get_hash("Section_ID")), _TransformType);
+                }
+            }
+        }
+    }
+    
+    Templates_Dungeon_Temp = 0;
+    gc_collect();
+}
+
+================================
+gml_GlobalScript___Dungeon
+AFTER
+================================
+
+function Dungeon_LoadTemplates()
+{
+    global.Templates_Dungeon = array_create(7);
+    var Templates_Dungeon_Temp = array_create(7);
+    
+    for (var _ClassType = 0; _ClassType < 7; _ClassType++)
+    {
+        var _ChunkFile = "data\\dungeons\\data_d_" + string(_ClassType) + ".json";
+        
+        if (file_exists(_ChunkFile))
+        {
+            var buf = buffer_load(_ChunkFile);
+            var str = buffer_read(buf, buffer_string);
+            buffer_delete(buf);
+            Templates_Dungeon_Temp[_ClassType] = json_parse(str);
+        }
+        else
+        {
+            Templates_Dungeon_Temp[_ClassType] = [];
+        }
+    }
+    
+    for (var _ClassType = 0; _ClassType < 7; _ClassType++)
+    {
+        if (_ClassType != UnknownEnum.Value_6)
+            global.Templates_Dungeon[_ClassType] = array_create(8);
+        
+        global.Templates_Dungeon[_ClassType][UnknownEnum.Value_0] = StructCopy(Templates_Dungeon_Temp[_ClassType]);
+        
+        if (_ClassType == UnknownEnum.Value_6)
+            continue;
+        
+        var _DungeonCount = array_length(global.Templates_Dungeon[_ClassType][UnknownEnum.Value_0]);
+        
+        for (var _TransformType = 1; _TransformType < 8; _TransformType++)
+        {
+            for (var _DungeonIndex = 0; _DungeonIndex < _DungeonCount; _DungeonIndex++)
+            {
+                global.Templates_Dungeon[_ClassType][_TransformType][_DungeonIndex] = StructCopy(Templates_Dungeon_Temp[_ClassType][_DungeonIndex]);
+                var _Dungeon = global.Templates_Dungeon[_ClassType][_TransformType][_DungeonIndex];
+                var _RoomArray = struct_get_from_hash(_Dungeon, variable_get_hash("Rooms"));
+                var _Rooms = array_length(_RoomArray);
+                
+                for (var _RoomIndex = 0; _RoomIndex < _Rooms; _RoomIndex++)
+                {
+                    var _Room = _RoomArray[_RoomIndex];
+                    var NewData = GetTransformedDungeonGrid(_Room.GridX, _Room.GridY, _Room.GridW, _Room.GridH, _TransformType);
+                    _Room.GridX = NewData[0];
+                    _Room.GridY = NewData[1];
+                    _Room.GridW = NewData[2];
+                    _Room.GridH = NewData[3];
+                    _Room.x = _Room.GridX * 256;
+                    _Room.y = _Room.GridY * 256;
+                    _Room.width = _Room.GridW * 256;
+                    _Room.height = _Room.GridH * 256;
+                    var _RoomSizeIndex = global.RoomSizeIndex[_Room.GridW][_Room.GridH];
+                    var _DoorArray = _Room.Doors;
+                    var _Doors = array_length(_DoorArray);
+                    
+                    for (var _DoorIndex = 0; _DoorIndex < _Doors; _DoorIndex++)
+                    {
+                        var _Door = _DoorArray[_DoorIndex];
+                        _Door.Position = GetTransformedDoorPosition(_Door.Position, _TransformType);
+                        _Door.ConnectedDoorPos = GetTransformedDoorPosition(_Door.ConnectedDoorPos, _TransformType);
+                        _Door.x = global.DoorCoordinates[_RoomSizeIndex][_Door.Position].x;
+                        _Door.y = global.DoorCoordinates[_RoomSizeIndex][_Door.Position].y;
+                        _Door.Location = GetTransformedDoorLocation(_Door.Location, _TransformType);
+                        
+                        if (_Door.Status == UnknownEnum.Value_3)
+                            _Dungeon.EntranceRoomIndex = _RoomIndex;
+                    }
+                    
+                    if (struct_get_from_hash(_Room, variable_get_hash("Section_ID")) > 0)
+                        _Room.Section_ID = GetTransformedSectionID(struct_get_from_hash(_Room, variable_get_hash("Section_ID")), _TransformType);
+                }
+            }
+        }
+    }
+    
+    Templates_Dungeon_Temp = 0;
+}
+
+================================
+gml_Object_oTitle_Step_0
+AFTER
+================================
+
+AltTabCheck();
+
+if (global.AltTab)
+    alarm[6]++;
+
+if (input_check_pressed("menu_input") && !keyboard_check(vk_alt))
+{
+    if (!AllowStart)
+    {
+        audio_stop_all();
+        
+        for (var a = 0; a <= 4; a++)
+            alarm[a] = 1;
+        
+        _Contrast = 1;
+        _Brightness = 1;
+        fx_set_parameter(FX_Contrast, "g_ContrastIntensity", _Contrast);
+        fx_set_parameter(FX_Contrast, "g_ContrastBrightness", _Brightness);
+        ShowBG = false;
+        AllowStart = true;
+    }
+    else if (!instance_exists(oCredits))
+    {
+        audio_stop_all();
+        room_goto_next();
+        exit;
+    }
+}
+
+if (ShowBG)
+{
+    _Contrast -= 0.03;
+    
+    if (_Contrast <= 1)
+        _Contrast = 1;
+    
+    _Brightness += 0.03;
+    
+    if (_Brightness >= 1)
+        _Brightness = 1;
+    
+    fx_set_parameter(FX_Contrast, "g_ContrastIntensity", _Contrast);
+    fx_set_parameter(FX_Contrast, "g_ContrastBrightness", _Brightness);
+    
+    if (_Contrast == 1 && _Brightness == 1)
+    {
+        ShowBG = false;
+        AllowStart = true;
+    }
+}

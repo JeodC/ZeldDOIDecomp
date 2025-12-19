@@ -1,0 +1,9 @@
+FloorLevel = GetFloorLevelID(x, y);
+PassageArea = array_create(4, 0);
+PassageArea[0] = x;
+PassageArea[1] = y - 64;
+PassageArea[2] = x + 32;
+PassageArea[3] = y + 8;
+PassageOrientation = 0;
+Closed = true;
+Opened = false;

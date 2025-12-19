@@ -1,0 +1,1 @@
+TreasureLightDim = true;

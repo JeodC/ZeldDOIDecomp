@@ -1,0 +1,2 @@
+if (AnimationEndDestroy)
+    instance_destroy(id);

@@ -1,0 +1,1 @@
+AllowAIMove = true;

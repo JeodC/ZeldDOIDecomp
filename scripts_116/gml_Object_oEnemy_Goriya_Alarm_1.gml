@@ -1,0 +1,1 @@
+Goriya_Shoot();

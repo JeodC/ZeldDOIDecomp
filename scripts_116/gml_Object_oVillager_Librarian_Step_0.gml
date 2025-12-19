@@ -1,0 +1,41 @@
+event_inherited();
+
+if (DB_Init_GrandChild)
+{
+    if (ResponseIndex == -1)
+        ResponseIndex = global.Inventory_ItemData[UnknownEnum.Value_3].Owns[0] ? 0 : -1;
+    
+    DB_Init_GrandChild = false;
+    DB_Started_GrandChild = true;
+    exit;
+}
+
+if (DB_Started_GrandChild)
+{
+    if (!instance_exists(global.DB_Inst))
+    {
+        DB_Started_GrandChild = false;
+        
+        switch (ResponseIndex)
+        {
+            case 0:
+                global.Paused = true;
+                
+                with (oLink)
+                {
+                    Inventory_DeleteItemClass(UnknownEnum.Value_3);
+                    var inst = instance_create_layer(x, y, "ObjsHigher_Upper", ObjIndexFromItemClass(other.ItemHolding));
+                    HoldUpItem(inst);
+                }
+                
+                ItemHolding = -4;
+                ResponseIndex = 1;
+                break;
+        }
+    }
+}
+
+enum UnknownEnum
+{
+    Value_3 = 3
+}

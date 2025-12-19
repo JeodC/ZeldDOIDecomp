@@ -1,0 +1,2 @@
+CircleShrink = false;
+CircleExpand = true;

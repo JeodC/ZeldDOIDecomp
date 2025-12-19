@@ -1,0 +1,1 @@
+WallCollided = true;

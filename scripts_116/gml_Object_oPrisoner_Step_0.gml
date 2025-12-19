@@ -1,0 +1,65 @@
+if (global.Paused && !DB_Started)
+{
+    image_speed = 0;
+    ObjIncAlarms();
+    exit;
+}
+
+if (DB_Started)
+    ObjIncAlarms();
+
+switch (State)
+{
+    case UnknownEnum.Value_0:
+        image_speed = 1;
+        break;
+    
+    case UnknownEnum.Value_1:
+        image_speed = 1;
+        
+        if (image_index >= (image_number - 0.1) || image_index < 1)
+            image_index = 1;
+        
+        if (ObjCollision(x + (4 * Dir), y, oWall, FloorLevel) == -4)
+        {
+            x += (Speed * Dir);
+        }
+        else
+        {
+            Dir *= -1;
+            alarm[0] = irandom_range(ChangeDirAlarmMin, ChangeDirAlarmMax);
+        }
+        
+        break;
+    
+    case UnknownEnum.Value_2:
+        switch (Index)
+        {
+            default:
+                image_index = 0;
+                break;
+            
+            case UnknownEnum.Value_10:
+                image_index = 1;
+                break;
+        }
+        
+        image_speed = 0;
+        break;
+}
+
+if (DB_Init)
+{
+    global.DB_Inst = instance_create_layer(0, 0, "System", oDialogueBox);
+    global.DB_Inst.Script = DB_Script;
+    DB_Init = false;
+    DB_Started = true;
+}
+
+enum UnknownEnum
+{
+    Value_0,
+    Value_1,
+    Value_2,
+    Value_10 = 10
+}

@@ -1,0 +1,144 @@
+visible = false;
+Link_LoadCharacterIndex();
+keyUp = false;
+keyDown = false;
+keyLeft = false;
+keyRight = false;
+Action[UnknownEnum.Value_0] = false;
+Action[UnknownEnum.Value_1] = false;
+Action[UnknownEnum.Value_2] = false;
+Action[UnknownEnum.Value_3] = false;
+Action[UnknownEnum.Value_4] = false;
+Action[UnknownEnum.Value_5] = false;
+Action[UnknownEnum.Value_7] = false;
+Action[UnknownEnum.Value_8] = false;
+Action[UnknownEnum.Value_9] = false;
+DescendingPhase = 0;
+DescendingLocation = 0;
+MoveAssist = false;
+MoveAssistDir = 0;
+MoveAssistWallInst = -4;
+InitNewDungeon = false;
+vx = 0;
+vy = 0;
+Facing = 1;
+FacingLock = Facing;
+WalkSpeed = 1.5;
+RunSpeed = 2;
+CarryingSpeed = 1.25;
+MoveAssistSpeed = 1;
+StairSpeed = 0.5;
+StairsAutoMove = false;
+StairsFloorLevelDir = 0;
+RoomIndex = 0;
+AutoMoveFrames = 0;
+AutoMoveSpeed = 0;
+AutoMoveDirX = 0;
+AutoMoveDirY = 0;
+PushingWall = false;
+PushingDirX = 0;
+PushingDirY = 0;
+CollidedObjList = ds_list_create();
+CollidedWallList = ds_list_create();
+CollidedShopItemList = ds_list_create();
+FloorLevel = 1;
+FloorLevelStr = "Upper";
+House_Entering = false;
+House_Inside = false;
+House_Leaving = false;
+House_RoomIndex = 0;
+House_OldRoomIndex = 0;
+House_X = 0;
+House_Y = 0;
+House_OldX = 0;
+House_OldY = 0;
+House_DoorInst = -4;
+Castle_Entering = false;
+Castle_EntranceWallInst = -4;
+AllowCastleEntranceWallCollide = true;
+Warp_Engage = false;
+Warp_RoomIndex_From = 0;
+Warp_RoomIndex_To = 0;
+HitBox = instance_create_layer(x, y, "ObjsHigher_Upper", oLink_HitBox);
+Invincible = false;
+HitFlashingStatus = false;
+HitFlashingDelay = 3;
+HitFlashingLength = 80;
+HitSoundDelay = 3;
+StarActive = false;
+UncurseAfterStar = false;
+ShockEnemyInst = -4;
+ShockDrawSword = false;
+AttackPoints = 1;
+DefensePoints = 0;
+ShieldDir = 2;
+Shield_InitData();
+BowSprite = sBow;
+BowArrow = UnknownEnum.Value_0;
+Lighting = false;
+LampLightMaxR = 0.6;
+LampLightMaxG = 0.6;
+LampLightMaxB = 0.6;
+LampLightR = LampLightMaxR;
+LampLightG = LampLightMaxG;
+LampLightB = LampLightMaxB;
+LampStrength[0] = 1.4;
+LampStrength[1] = 2.2;
+LampStrength[2] = 3;
+LampFlickerDist = 0;
+LampFlickerDir = 1;
+LampFlickerMaxLen = 0.18;
+LampMaxFlickerLen = random_range(0.01, LampFlickerMaxLen);
+LampDim = 1;
+LampDimMin = 0;
+LightArrayIndex[0] = 0;
+ShopItemLook = -4;
+AllowFairy = true;
+ItemHolding = -4;
+Cape = false;
+AghanimTakingItems = false;
+InventoryFullInst = -4;
+StandingOnMap = false;
+StandingOnCompass = false;
+LowHealthSound = -4;
+LastDoorID = -4;
+GoingThruClosedDoor = false;
+GoingThruClosedDoorID = -4;
+DoorPassage = array_create(4, 0);
+InDoorPassage = 0;
+PassageOrientation = 0;
+InDoor = false;
+InDoor_Full = false;
+InDoor_Facing = false;
+InDoor_BlockItem = false;
+InDoor_Aligned = true;
+InDoor_House = false;
+InWater = false;
+StarColors = [[1, 0, 0], [-3, -3, -3], [0, 1, 0], [-1, -1, -1], [0, 0, 1], [-3, -3, -3], [-2, -2, -2], [-1, -1, -1]];
+StarColorIndex = 0;
+StarColorDelay = 6;
+StarSparkleDist = 16;
+StarLightColors = [[1.25, 0.65, 0.65], [1.25, 1.25, 0.65], [0.65, 1.25, 0.65], [1.25, 1.25, 0.65], [0.65, 0.65, 1.25], [1.25, 1.25, 0.65]];
+StarLightIndex = 0;
+StarTimer = 500;
+FallSpawnX = 0;
+FallSpawnY = 0;
+FallSpawnFloorLevel = 1;
+FallSpawnFacing = 1;
+BounceBack = false;
+global.Cursed = false;
+Link_SetStartingItems();
+UpdateState(UnknownEnum.Value_1);
+
+enum UnknownEnum
+{
+    Value_0,
+    Value_1,
+    Value_2,
+    Value_3,
+    Value_4,
+    Value_5,
+    Value_7 = 7,
+    Value_8,
+    Value_9
+}

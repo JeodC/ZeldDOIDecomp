@@ -1,0 +1,1 @@
+ShakeAmount = 0;

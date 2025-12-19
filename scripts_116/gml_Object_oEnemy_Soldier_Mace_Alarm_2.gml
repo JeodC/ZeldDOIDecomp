@@ -1,0 +1,1 @@
+WeaponInst.SpinExtend = true;

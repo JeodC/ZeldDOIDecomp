@@ -1,0 +1,14 @@
+FloorLevel = GetFloorLevelID(x, y);
+Location = "Top";
+PassageOrientation = 0;
+PassageArea = array_create(4, 0);
+PassageArea[0] = x - 4;
+PassageArea[1] = y - 40;
+PassageArea[2] = x + 20;
+PassageArea[3] = y - 2;
+House_RoomIndex = 0;
+House_X = 0;
+House_Y = 0;
+WallInst = WallObj_Create("Objs_" + GetFloorLevelString(FloorLevel), x, y, 2, 2);
+WallInst.FloorLevel = FloorLevel;
+WallInst.BlockLink = false;

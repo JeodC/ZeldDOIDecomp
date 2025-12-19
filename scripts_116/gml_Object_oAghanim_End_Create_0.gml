@@ -1,0 +1,12 @@
+DefeatMusic = -4;
+Blackout = false;
+BlackoutFade = 0;
+EndGraphics = false;
+EndGraphicsFade = 1;
+AllowExit = false;
+Exiting = false;
+ExitFade = 0;
+MusicID = -4;
+alarm[0] = 30;
+alarm[1] = 350;
+User_SaveStats();
